@@ -1,4 +1,8 @@
 ```
+docker buildx b . -f Dockerfile.1 -t dhi-demo:node-debian --load --sbom=generator=docker/scout-sbom-indexer
+docker buildx b . -f Dockerfile.2 -t dhi-demo:node-debian-slim --load --sbom=generator=docker/scout-sbom-indexer
+docker buildx b . -f Dockerfile.3 -t dhi-demo:node-dhi --load --sbom=generator=docker/scout-sbom-indexer
+
 regctl artifact list dhi/node:20 --external registry.scout.docker.com/dhi/node --platform linux/amd64   
 docker scout attest get --predicate-type https://slsa.dev/provenance/v0.2 dhi/node:20 | jq '.predicate'
 docker scout attest get --predicate-type https://slsa.dev/verification_summary/v1 dhi/node:20 | jq
