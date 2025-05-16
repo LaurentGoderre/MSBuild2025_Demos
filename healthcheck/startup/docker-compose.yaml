@@ -1,0 +1,15 @@
+services:
+  nginx:
+    image: dhi/nginx:1-debian12
+
+  healthcheck:
+    image: dhi/curl:7-debian12
+    command: ["-sS", "http://nginx:8080"]
+    restart: on-failure
+
+  test:
+    image: dhi/curl:7-debian12 
+    command: ["http://nginx:8080"]
+    depends_on:
+      healthcheck:
+        condition: service_completed_successfully

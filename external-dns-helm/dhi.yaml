@@ -1,0 +1,5 @@
+image:
+  repository: docker.io/dhi/external-dns
+
+imagePullSecrets:
+  - name: regcred

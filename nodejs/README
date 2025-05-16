@@ -1,0 +1,8 @@
+```
+regctl artifact list dhi/node:20 --external registry.scout.docker.com/dhi/node --platform linux/amd64   
+docker scout attest get --predicate-type https://slsa.dev/provenance/v0.2 dhi/node:20 | jq '.predicate'
+docker scout attest get --predicate-type https://slsa.dev/verification_summary/v1 dhi/node:20 | jq
+docker scout attest get --predicate-type https://slsa.dev/verification_summary/v1 dhi/node:20 --verify > /dev/null
+
+docker scout attest get --predicate-type https://openvex.dev/ns/v0.2.0 dhi/node:20 --predicate --verify > vex.json
+grype dhi/node:20 --vex=./vex.json

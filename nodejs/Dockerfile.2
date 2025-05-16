@@ -1,0 +1,21 @@
+FROM node:20-bullseye@sha256:218b79a1d4c9d749dc793c21ecae7d7e04feaefc19e4cc2c3f5994358a310491 AS build
+
+WORKDIR /home/node/app
+
+ADD package.json .
+
+RUN yarn
+
+# -----
+
+FROM node:20-bullseye-slim@sha256:d22f9a922b63416d8e96f8c4b3eaa7e8451cd1eee7d5b676966cd44a43655dfa
+
+WORKDIR /home/node/app
+
+COPY --from=build /home/node/app .
+
+ADD index.js .
+
+EXPOSE 3000
+
+CMD ["index.js"]

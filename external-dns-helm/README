@@ -1,0 +1,12 @@
+```
+helm repo add external-dns https://kubernetes-sigs.github.io/external-dns/
+
+kubectl create secret generic regcred \
+    --from-file=.dockerconfigjson=$HOME/.docker/config.json \
+    --type=kubernetes.io/dockerconfigjson
+
+helm upgrade --install external-dns external-dns/external-dns --version 1.16.1 --set image.repository=docker.io/dhi/external-dns --set image.tag=0.16 --set "imagePullSecrets[0].name=regcred"
+
+# or
+
+helm upgrade --install external-dns external-dns/external-dns --version 1.16.1 -f dhi.yaml

@@ -1,0 +1,3 @@
+```
+docker run --rm -v ./my.conf:/etc/redis/conf.d/my.conf -v ./cluster.conf:/etc/cluster/cluster.conf dhi/redis:7.4
+```
